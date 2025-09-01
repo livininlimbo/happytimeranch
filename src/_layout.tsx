@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Index from '../app/index';
@@ -9,12 +9,32 @@ import Contact from '@/app/contact';
 import Candles from '@/app/candles';
 import OurFarm from '@/app/ourfarm';
 import OurTeam from '@/app/ourteam';
-
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    async function loadFonts() {
+      await Font.loadAsync({
+      Ionicons: require('../assets/fonts/Ionicons.ttf'),
+          });
+      setFontsLoaded(true);
+    }
+    loadFonts();
+  }, []);
+
+  if (!fontsLoaded) {
+    return null; // or a loading spinner
+  }
+
+  
   return (
+    <>
+    <Ionicons name="menu" size={1} color="transparent" />
     <NavigationContainer>
       {/* Wrap the entire navigator + CartIcon inside CartProvider */}
         {/* Optional: You can position CartIcon absolutely in your layout */}
@@ -30,6 +50,7 @@ const RootNavigator = () => {
           <Stack.Screen name="Our Team" component={OurTeam} />
         </Stack.Navigator>
     </NavigationContainer>
+        </>
   );
 };
 

@@ -28,7 +28,8 @@
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/Alegreya-VariableFont_wght.ttf"
+            "./assets/fonts/Alegreya-VariableFont_wght.ttf",
+            "./assets/fonts/Ionicons.ttf"
           ]
         }
       ],
