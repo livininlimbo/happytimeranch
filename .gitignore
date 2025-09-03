@@ -1,9 +1,19 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-# dependencies
+# Ignore all node_modules
 node_modules/
 
-!assets/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/**
+# But do NOT ignore this specific Ionicons font
+!assets/
+!assets/node_modules/
+!assets/node_modules/@expo/
+!assets/node_modules/@expo/vector-icons/
+!assets/node_modules/@expo/vector-icons/build/
+!assets/node_modules/@expo/vector-icons/build/vendor/
+!assets/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/
+!assets/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/
+!assets/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.6148e7019854f3bde85b633cb88f3c25.ttf
+!assets/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf
 
 # Expo
 .expo/
