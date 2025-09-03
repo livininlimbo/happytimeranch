@@ -10,26 +10,20 @@ import Candles from '@/app/candles';
 import OurFarm from '@/app/ourfarm';
 import OurTeam from '@/app/ourteam';
 import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import '../assets/fonts/fonts.css';
+
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  useEffect(() => {
-    async function loadFonts() {
-      await Font.loadAsync({
-      Ionicons: require('../assets/fonts/Ionicons.ttf'),
-          });
-      setFontsLoaded(true);
-    }
-    loadFonts();
-  }, []);
+  const [fontsLoaded] = useFonts({
+    'Ionicons': 'https://cdn.jsdelivr.net/npm/ionicons@6.0.0/dist/fonts/ionicons.ttf',
+  });
 
-  if (!fontsLoaded) {
-    return null; // or a loading spinner
-  }
+  if (!fontsLoaded) return null;
 
   
   return (
