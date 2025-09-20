@@ -1,19 +1,20 @@
 // ProductDetail.tsx
 import MobileMenu from '@/assets/components/MobileMenu';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
-  Dimensions,
-  Image,
-  ImageBackground,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    ActivityIndicator,
+    Dimensions,
+    Image,
+    ImageBackground,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
+import { trackScreenView } from '../../assets/components/analytics';
 import HeaderHome from '../../assets/components/HeaderHome';
 import { addToCart, storefront } from '../headless/storefront';
 
