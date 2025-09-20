@@ -1,20 +1,19 @@
 // Footer.tsx
-import React, { useState, useEffect, useRef } from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  Animated,
-  Platform,
-  Pressable,
-  Text,
-  Linking,
-} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import * as EmailComposer from 'expo-mail-composer';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import HoverableMenuItem from './HoverableMenuItem';
+import * as EmailComposer from 'expo-mail-composer';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Animated,
+  Dimensions,
+  Linking,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import HoverableLogo from './HoverableFooterLogo';
 
 const Footer = () => {
@@ -47,8 +46,8 @@ const Footer = () => {
           <Text style={styles.menuText}>© {new Date().getFullYear()} Happy Time Ranch.</Text>
           {isDesktop && <View style={styles.verticalSpacer} />}
           <Text style={styles.menuText}> +1 530-339-2214 </Text>
-          {isDesktop && <View style={styles.verticalSpacer} />}
-          <Text style={styles.menuText}> 3340 Nancy Drive, Auburn, CA </Text>
+          {/* {isDesktop && <View style={styles.verticalSpacer} />}
+          <Text style={styles.menuText}> 3340 Nancy Drive, Auburn, CA </Text> */}
           {/* <HoverableMenuItem label="Our Products" route="shopnow" />
           {isDesktop && <View style={styles.verticalSpacer} />}
           <HoverableMenuItem label="Our Farm" route="ourfarm" />
