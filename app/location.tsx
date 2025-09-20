@@ -1,20 +1,28 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  ImageBackground,
-  Image,
-  Dimensions,
-} from 'react-native';
 import HeaderHome from '@/assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
+import { useFocusEffect } from 'expo-router';
+import React from 'react';
+import {
+  Dimensions,
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import { trackScreenView } from '../assets/components/analytics';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const isSmallScreen = SCREEN_WIDTH < 768;
 
 const LocationPage = () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('location');
+    }, [])
+  );
+
   return (
     <View style={styles.root}>
       <HeaderHome />

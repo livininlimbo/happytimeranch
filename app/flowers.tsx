@@ -1,20 +1,28 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useFocusEffect } from 'expo-router';
+import React from 'react';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-import HeaderHome from '../assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
+import HeaderHome from '../assets/components/HeaderHome';
+import { trackScreenView } from '../assets/components/analytics';
 
 const Flowers = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('flowers');
+    }, [])
+  );
 
   const flowers = [
     { name: 'Sunflowers', description: 'Bright, cheerful, and perfect for any season.' },

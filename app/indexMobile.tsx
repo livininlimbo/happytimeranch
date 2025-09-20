@@ -1,17 +1,19 @@
-import React, { memo } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  useWindowDimensions,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ImageBackground } from 'react-native';
-import { Image } from 'expo-image';
 import MobileMenu from '@/assets/components/MobileMenu';
 import Footer from '@/assets/components/footer';
+import { useNavigation } from '@react-navigation/native';
+import { Image } from 'expo-image';
+import { useFocusEffect } from 'expo-router';
+import React, { memo } from 'react';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
+import { trackScreenView } from '../assets/components/analytics';
 
 // ✅ Memoized Product Card
 const ProductCard = memo(({ item, isSmallScreen, onPress }: any) => (
@@ -38,6 +40,12 @@ const Index = () => {
   const navigation = useNavigation();
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 768;
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('home');
+    }, [])
+  );
 
   // ✅ Use static requires (good for caching and bundling)
   const products = [

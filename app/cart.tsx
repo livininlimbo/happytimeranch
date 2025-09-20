@@ -1,20 +1,21 @@
+import MobileMenu from '@/assets/components/MobileMenu';
+import { useFocusEffect } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  TouchableOpacity,
   ActivityIndicator,
-  useWindowDimensions,
+  Image,
   ImageBackground,
   Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
 } from 'react-native';
+import { trackScreenView } from '../assets/components/analytics';
 import HeaderHome from '../assets/components/HeaderHome';
-import MobileMenu from '@/assets/components/MobileMenu';
-import { getCart, createCart, updateCartQuantity, removeFromCart } from './headless/storefront';
-import Footer from '@/assets/components/footer';
+import { createCart, getCart, removeFromCart, updateCartQuantity } from './headless/storefront';
 
 type CartLine = {
   id: string;
@@ -41,6 +42,12 @@ const CartPage = () => {
 
   const [cart, setCart] = useState<Cart | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('cart');
+    }, [])
+  );
 
   const initCart = async () => {
     let cartId = typeof window !== 'undefined' ? localStorage.getItem('cartId') : null;

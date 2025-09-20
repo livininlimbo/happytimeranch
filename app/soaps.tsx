@@ -1,22 +1,30 @@
+import MobileMenu from '@/assets/components/MobileMenu';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from 'expo-router';
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  ImageBackground,
-  TouchableOpacity,
   Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   useWindowDimensions,
+  View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import HeaderHome from '../assets/components/HeaderHome';
-import MobileMenu from '@/assets/components/MobileMenu';
+import { trackScreenView } from '../assets/components/analytics';
 
 const BathProducts = () => {
   const navigation = useNavigation();
   const { width } = useWindowDimensions();
   const isLargeScreen = width >= 900;
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('soaps');
+    }, [])
+  );
 
   const soaps = [
     { name: 'Olive Oil', description: 'Moisturizing and gentle on the skin.' },

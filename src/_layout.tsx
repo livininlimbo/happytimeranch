@@ -1,38 +1,43 @@
-import React, {useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Index from '../app/index';
-import Soaps from '../app/soaps';
-import Flowers from '../app/flowers';
-import Eggs from '../app/eggs';
-import Contact from '@/app/contact';
 import Candles from '@/app/candles';
+import Contact from '@/app/contact';
 import OurFarm from '@/app/ourfarm';
 import OurTeam from '@/app/ourteam';
-import * as Font from 'expo-font';
-import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
+import Eggs from '../app/eggs';
+import Flowers from '../app/flowers';
+import Index from '../app/index';
+import Soaps from '../app/soaps';
+import { initAnalytics } from '../assets/components/analytics';
 import '../assets/fonts/fonts.css';
-
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
-
+  console.log('📊 _layout.tsx RootNavigator is rendering!');
+  
   const [fontsLoaded] = useFonts({
     'Ionicons': 'https://cdn.jsdelivr.net/npm/ionicons@6.0.0/dist/fonts/ionicons.ttf',
   });
 
+  useEffect(() => {
+    console.log('📊 _layout.tsx useEffect - calling initAnalytics...');
+    initAnalytics().then(() => {
+      console.log('📊 _layout.tsx - initAnalytics completed');
+    }).catch((error) => {
+      console.error('📊 _layout.tsx - initAnalytics failed:', error);
+    });
+  }, []);
+
   if (!fontsLoaded) return null;
 
-  
   return (
     <>
-    <Ionicons name="menu" size={1} color="transparent" />
-    <NavigationContainer>
-      {/* Wrap the entire navigator + CartIcon inside CartProvider */}
-        {/* Optional: You can position CartIcon absolutely in your layout */}
-
+      <Ionicons name="menu" size={1} color="transparent" />
+      <NavigationContainer>
         <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Index} />
           <Stack.Screen name="Soaps" component={Soaps} />
@@ -43,8 +48,8 @@ const RootNavigator = () => {
           <Stack.Screen name="Our Farm" component={OurFarm} />
           <Stack.Screen name="Our Team" component={OurTeam} />
         </Stack.Navigator>
-    </NavigationContainer>
-        </>
+      </NavigationContainer>
+    </>
   );
 };
 

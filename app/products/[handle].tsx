@@ -1,21 +1,21 @@
 // ProductDetail.tsx
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Dimensions,
-  Pressable,
-  ImageBackground,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
-import HeaderHome from '../../assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
-import { storefront, addToCart } from '../headless/storefront';
+import { useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  Image,
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import HeaderHome from '../../assets/components/HeaderHome';
+import { addToCart, storefront } from '../headless/storefront';
 
 const MOBILE_BREAKPOINT = 768;
 
@@ -42,6 +42,14 @@ const ProductDetail = () => {
   const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [loadingAddCart, setLoadingAddCart] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (handle) {
+        trackScreenView(`product-${handle}`);
+      }
+    }, [handle])
+  );
 
   const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width);
   useEffect(() => {

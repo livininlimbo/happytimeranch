@@ -1,19 +1,20 @@
-import React, { useState, useEffect, memo } from 'react';
+import { Image } from 'expo-image';
+import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
+import React, { memo, useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  Dimensions,
   ImageBackground,
   Pressable,
   ScrollView,
-  Dimensions,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
-import { useRouter, useLocalSearchParams } from 'expo-router';
-import { Image } from 'expo-image';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import HeaderHome from '../assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
+import { trackScreenView } from '../assets/components/analytics';
+import HeaderHome from '../assets/components/HeaderHome';
 import { storefront } from './headless/storefront';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -92,6 +93,12 @@ const ShopNow = () => {
     (params.initialTab as 'soaps' | 'scrubs' | 'candles') || 'soaps'
   );
   const [products, setProducts] = useState<Product[]>([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('shopnow');
+    }, [])
+  );
 
   const switchTab = (newTab: 'soaps' | 'scrubs' | 'candles') => {
     if (newTab !== activeTab) setActiveTab(newTab);

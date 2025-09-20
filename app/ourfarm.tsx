@@ -1,20 +1,27 @@
-import React, { useMemo } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
-import { Image } from 'expo-image';
 import HeaderHome from '@/assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
+import { Image } from 'expo-image';
+import { useFocusEffect } from 'expo-router';
+import React, { useMemo } from 'react';
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import { trackScreenView } from '../assets/components/analytics';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const isSmallScreen = SCREEN_WIDTH < 768;
 
 const OurFarmPage = () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('ourfarm');
+    }, [])
+  );
+
   const farmFeatures = useMemo(
     () => [
       {

@@ -1,18 +1,26 @@
+import MobileMenu from '@/assets/components/MobileMenu';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from 'expo-router';
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
   ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import HeaderHome from '../assets/components/HeaderHome';
-import MobileMenu from '@/assets/components/MobileMenu';
+import { trackScreenView } from '../assets/components/analytics';
 
 const Eggs = () => {
   const navigation = useNavigation();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('eggs');
+    }, [])
+  );
 
   const handleOrderNow = () => {
     navigation.navigate('locationplaceholder'); // Make sure 'locationplaceholder' matches your route name exactly

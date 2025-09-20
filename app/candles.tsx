@@ -1,19 +1,27 @@
+
+import MobileMenu from '@/assets/components/MobileMenu';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from 'expo-router';
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
   ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  Image,
+  View
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { trackScreenView } from '../assets/components/analytics';
 import HeaderHome from '../assets/components/HeaderHome';
-import MobileMenu from '@/assets/components/MobileMenu';
 
 const Candles = () => {
   const navigation = useNavigation();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('candles');
+    }, [])
+  );
 
   const features = [
     { name: 'Soy Wax or Beeswax', description: 'Clean-burning and eco-friendly.' },

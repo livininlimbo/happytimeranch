@@ -1,21 +1,27 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  ImageBackground,
-  Image,
-  Dimensions,
-} from 'react-native';
+import FarmMapBubbles from '@/assets/components/FarmMap';
 import HeaderHome from '@/assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
-import FarmMapBubbles
- from '@/assets/components/FarmMap';
+import { useFocusEffect } from 'expo-router';
+import React from 'react';
+import {
+  Dimensions,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import { trackScreenView } from '../assets/components/analytics';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const isSmallScreen = SCREEN_WIDTH < 768;
 
 const OurAnimalsPage = () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('ouranimals');
+    }, [])
+  );
+
   const ourChickens = [
     { image: require('../assets/images/chicken1.jpg'), name: 'Snowball', role: 'Chicken' },
     { image: require('../assets/images/chicken2.jpg'), name: 'Chicoletta', role: 'Chicken' },

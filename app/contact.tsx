@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  ImageBackground,
-  Alert,
-} from 'react-native';
-import { useForm, ValidationError } from '@formspree/react';
 import HeaderHome from '@/assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
-import Footer from '@/assets/components/footer';
+import { useForm, ValidationError } from '@formspree/react';
+import { useFocusEffect } from 'expo-router';
+import React, { useState } from 'react';
+import {
+  Alert,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { trackScreenView } from '../assets/components/analytics';
 
 const Contact = () => {
   const [state, handleSubmit] = useForm("mgvlvoro");
@@ -20,6 +21,12 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('contact');
+    }, [])
+  );
 
 const onSubmit = async () => {
   if (!name || !email || !message) {

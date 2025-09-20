@@ -1,23 +1,31 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import HeaderHome from '@/assets/components/HeaderHome';
 import MobileMenu from '@/assets/components/MobileMenu';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from 'expo-router';
+import React from 'react';
+import {
+  Dimensions,
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { trackScreenView } from '../assets/components/analytics';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const isSmallScreen = SCREEN_WIDTH < 768;
 
 const ProductsPage = () => {
   const navigation = useNavigation();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      trackScreenView('products');
+    }, [])
+  );
 
   const products = [
     {
